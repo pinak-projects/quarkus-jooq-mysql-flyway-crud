@@ -18,5 +18,5 @@ public final class APIConstants {
 	public static final String ERROR_DELETE_USER = "Error in deleting user details, please try again.";
 	public static final String ERROR_UPDATE_USER = "Error in updating user details, please try again.";
 	public static final String SUCCESS_UPDATE_USER = "User details updated successfully.";
-
+    public static final String BLANK_QUOTE = " ";
 }

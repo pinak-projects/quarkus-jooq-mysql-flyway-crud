@@ -1,21 +1,21 @@
 package org.jooqDemo.entity;
 
 import lombok.*;
+import org.jooqDemo.constants.APIConstants;
 
+import javax.annotation.PostConstruct;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 
 @Builder
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class User extends BaseEntity {
 
 	@NotNull
-	@Positive
-	private int userId;
+	private Integer userId;
 	
 	@NotBlank
 	private String firstName;
@@ -29,4 +29,8 @@ public class User {
 	@NotBlank
 	private String password;
 
+	@PostConstruct
+	public String getFullName() {
+		return new StringBuilder().append(firstName).append(APIConstants.BLANK_QUOTE).append(lastName).toString();
+	}
 }

@@ -71,6 +71,9 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <uberJar>true</uberJar>
+        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
@@ -138,9 +141,9 @@
                 <configuration>
                   <generator>
                     <generate>
-                      <pojos>true</pojos>
+                      <pojos>false</pojos>
                       <daos>true</daos>
-                      <pojosEqualsAndHashCode>true</pojosEqualsAndHashCode>
+                      <pojosEqualsAndHashCode>false</pojosEqualsAndHashCode>
                       <javaTimeTypes>true</javaTimeTypes>
                     </generate>
                     <database>
@@ -162,8 +165,8 @@
                     </database>
                     <target>
                       <clean>true</clean>
-                      <packageName>com.jooq</packageName>
-                      <directory>gensrc</directory>
+                      <packageName>gensrc</packageName>
+                      <directory>src/main/java</directory>
                     </target>
                   </generator>
                 </configuration>

@@ -13,6 +13,7 @@ public class GlobalExceptionMapper implements ExceptionMapper<Exception> {
     @Override
     public Response toResponse(Exception e) {
         e.printStackTrace();
+        System.out.println("here...");
         return Response.serverError().entity(new ResponseMessage(APIConstants.SOMETHING_WENT_WRONG)).build();
     }
 }
