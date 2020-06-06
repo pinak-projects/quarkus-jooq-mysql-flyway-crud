@@ -17,7 +17,7 @@ import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.Name;
 import org.jooq.Record;
-import org.jooq.Row8;
+import org.jooq.Row9;
 import org.jooq.Schema;
 import org.jooq.Table;
 import org.jooq.TableField;
@@ -33,7 +33,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class UserMaster extends TableImpl<UserMasterRecord> {
 
-    private static final long serialVersionUID = 1524244783;
+    private static final long serialVersionUID = -168768328;
 
     /**
      * The reference instance of <code>user_master</code>
@@ -89,6 +89,11 @@ public class UserMaster extends TableImpl<UserMasterRecord> {
     public final TableField<UserMasterRecord, LocalDateTime> UPDATED_ON = createField(DSL.name("updated_on"), org.jooq.impl.SQLDataType.LOCALDATETIME.nullable(false).defaultValue(org.jooq.impl.DSL.field("CURRENT_TIMESTAMP", org.jooq.impl.SQLDataType.LOCALDATETIME)), this, "");
 
     /**
+     * The column <code>user_master.role_id</code>.
+     */
+    public final TableField<UserMasterRecord, Integer> ROLE_ID = createField(DSL.name("role_id"), org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
      * Create a <code>user_master</code> table reference
      */
     public UserMaster() {
@@ -142,6 +147,15 @@ public class UserMaster extends TableImpl<UserMasterRecord> {
     }
 
     @Override
+    public List<ForeignKey<UserMasterRecord, ?>> getReferences() {
+        return Arrays.<ForeignKey<UserMasterRecord, ?>>asList(Keys.CONSTRAINT_EB);
+    }
+
+    public RoleMaster roleMaster() {
+        return new RoleMaster(this, Keys.CONSTRAINT_EB);
+    }
+
+    @Override
     public UserMaster as(String alias) {
         return new UserMaster(DSL.name(alias), this);
     }
@@ -168,11 +182,11 @@ public class UserMaster extends TableImpl<UserMasterRecord> {
     }
 
     // -------------------------------------------------------------------------
-    // Row8 type methods
+    // Row9 type methods
     // -------------------------------------------------------------------------
 
     @Override
-    public Row8<Integer, String, String, String, String, Boolean, LocalDateTime, LocalDateTime> fieldsRow() {
-        return (Row8) super.fieldsRow();
+    public Row9<Integer, String, String, String, String, Boolean, LocalDateTime, LocalDateTime, Integer> fieldsRow() {
+        return (Row9) super.fieldsRow();
     }
 }

@@ -1,12 +1,13 @@
 package org.jooqDemo.service;
 
-import org.jooqDemo.entity.User;
+import org.jooqDemo.model.user.User;
+import org.jooqDemo.model.user.UserDetails;
 
 import java.util.List;
 
 public interface UserService {
 
-	User fetchUser(Integer userId);
+	UserDetails fetchUser(Integer userId);
 
 	int createUser(User user);
 
@@ -14,7 +15,7 @@ public interface UserService {
 
 	int deleteUser(Integer userId);
 
-	boolean isUserExistsById(Integer userId);
-
     int updateUserDetails(User user);
+
+	boolean isUserExists(Integer userId);
 }

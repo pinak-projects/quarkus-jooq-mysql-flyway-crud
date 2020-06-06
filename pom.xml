@@ -57,7 +57,9 @@
       <artifactId>jooq</artifactId>
       <version>3.13.2</version>
     </dependency>
+
   </dependencies>
+
   <build>
     <plugins>
       <plugin>
@@ -141,9 +143,10 @@
                 <configuration>
                   <generator>
                     <generate>
-                      <pojos>false</pojos>
+                      <relations>true</relations>
+                      <pojos>true</pojos>
                       <daos>true</daos>
-                      <pojosEqualsAndHashCode>false</pojosEqualsAndHashCode>
+                      <pojosEqualsAndHashCode>true</pojosEqualsAndHashCode>
                       <javaTimeTypes>true</javaTimeTypes>
                     </generate>
                     <database>

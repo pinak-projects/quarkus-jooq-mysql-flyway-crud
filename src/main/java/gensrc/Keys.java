@@ -4,9 +4,12 @@
 package gensrc;
 
 
+import gensrc.tables.RoleMaster;
 import gensrc.tables.UserMaster;
+import gensrc.tables.records.RoleMasterRecord;
 import gensrc.tables.records.UserMasterRecord;
 
+import org.jooq.ForeignKey;
 import org.jooq.Identity;
 import org.jooq.TableField;
 import org.jooq.UniqueKey;
@@ -24,28 +27,37 @@ public class Keys {
     // IDENTITY definitions
     // -------------------------------------------------------------------------
 
+    public static final Identity<RoleMasterRecord, Integer> IDENTITY_ROLE_MASTER = Identities0.IDENTITY_ROLE_MASTER;
     public static final Identity<UserMasterRecord, Integer> IDENTITY_USER_MASTER = Identities0.IDENTITY_USER_MASTER;
 
     // -------------------------------------------------------------------------
     // UNIQUE and PRIMARY KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final UniqueKey<RoleMasterRecord> CONSTRAINT_2 = UniqueKeys0.CONSTRAINT_2;
     public static final UniqueKey<UserMasterRecord> CONSTRAINT_E = UniqueKeys0.CONSTRAINT_E;
 
     // -------------------------------------------------------------------------
     // FOREIGN KEY definitions
     // -------------------------------------------------------------------------
 
+    public static final ForeignKey<UserMasterRecord, RoleMasterRecord> CONSTRAINT_EB = ForeignKeys0.CONSTRAINT_EB;
 
     // -------------------------------------------------------------------------
     // [#1459] distribute members to avoid static initialisers > 64kb
     // -------------------------------------------------------------------------
 
     private static class Identities0 {
+        public static Identity<RoleMasterRecord, Integer> IDENTITY_ROLE_MASTER = Internal.createIdentity(RoleMaster.ROLE_MASTER, RoleMaster.ROLE_MASTER.ROLE_ID);
         public static Identity<UserMasterRecord, Integer> IDENTITY_USER_MASTER = Internal.createIdentity(UserMaster.USER_MASTER, UserMaster.USER_MASTER.USER_ID);
     }
 
     private static class UniqueKeys0 {
+        public static final UniqueKey<RoleMasterRecord> CONSTRAINT_2 = Internal.createUniqueKey(RoleMaster.ROLE_MASTER, "CONSTRAINT_2", new TableField[] { RoleMaster.ROLE_MASTER.ROLE_ID }, true);
         public static final UniqueKey<UserMasterRecord> CONSTRAINT_E = Internal.createUniqueKey(UserMaster.USER_MASTER, "CONSTRAINT_E", new TableField[] { UserMaster.USER_MASTER.USER_ID }, true);
+    }
+
+    private static class ForeignKeys0 {
+        public static final ForeignKey<UserMasterRecord, RoleMasterRecord> CONSTRAINT_EB = Internal.createForeignKey(Keys.CONSTRAINT_2, UserMaster.USER_MASTER, "CONSTRAINT_EB", new TableField[] { UserMaster.USER_MASTER.ROLE_ID }, true);
     }
 }

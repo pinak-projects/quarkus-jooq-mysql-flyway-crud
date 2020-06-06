@@ -157,4 +157,18 @@ public class UserMasterDao extends DAOImpl<UserMasterRecord, gensrc.tables.pojos
     public List<gensrc.tables.pojos.UserMaster> fetchByUpdatedOn(LocalDateTime... values) {
         return fetch(UserMaster.USER_MASTER.UPDATED_ON, values);
     }
+
+    /**
+     * Fetch records that have <code>role_id BETWEEN lowerInclusive AND upperInclusive</code>
+     */
+    public List<gensrc.tables.pojos.UserMaster> fetchRangeOfRoleId(Integer lowerInclusive, Integer upperInclusive) {
+        return fetchRange(UserMaster.USER_MASTER.ROLE_ID, lowerInclusive, upperInclusive);
+    }
+
+    /**
+     * Fetch records that have <code>role_id IN (values)</code>
+     */
+    public List<gensrc.tables.pojos.UserMaster> fetchByRoleId(Integer... values) {
+        return fetch(UserMaster.USER_MASTER.ROLE_ID, values);
+    }
 }

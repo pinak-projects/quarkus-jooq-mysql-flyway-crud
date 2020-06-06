@@ -4,6 +4,7 @@
 package gensrc;
 
 
+import gensrc.tables.RoleMaster;
 import gensrc.tables.UserMaster;
 
 
@@ -12,6 +13,11 @@ import gensrc.tables.UserMaster;
  */
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Tables {
+
+    /**
+     * The table <code>role_master</code>.
+     */
+    public static final RoleMaster ROLE_MASTER = RoleMaster.ROLE_MASTER;
 
     /**
      * The table <code>user_master</code>.

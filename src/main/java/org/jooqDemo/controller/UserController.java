@@ -3,12 +3,12 @@ package org.jooqDemo.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.jooqDemo.constants.APIConstants;
 import org.jooqDemo.constants.ResponseMessage;
-import org.jooqDemo.entity.User;
 import org.jooqDemo.exception.CustomException;
 import org.jooqDemo.exception.ResourceNotFoundException;
+import org.jooqDemo.model.user.User;
+import org.jooqDemo.model.user.UserDetails;
 import org.jooqDemo.service.UserService;
 
-import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.validation.Valid;
 import javax.ws.rs.*;
@@ -18,7 +18,6 @@ import javax.ws.rs.core.Response.Status;
 import java.util.List;
 
 @Slf4j
-@ApplicationScoped
 @Path(value = APIConstants.REST_USERS_END_POINT)
 public class UserController {
 
@@ -43,7 +42,7 @@ public class UserController {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     public Response updateUser(@PathParam(APIConstants.USER_ID) final Integer userId, @Valid User user) {
-        if (!userService.isUserExistsById(userId)) {
+        if (!userService.isUserExists(userId)) {
             log.info("ERROR: updateUser, MESSAGE: {}, ID: {}", APIConstants.ERROR_USER_NOT_FOUND, userId);
             throw new ResourceNotFoundException(APIConstants.ERROR_USER_NOT_FOUND);
         }
@@ -60,7 +59,7 @@ public class UserController {
     @GET
     @Path(value = APIConstants.USER_ID_PARAM)
     @Produces(MediaType.APPLICATION_JSON)
-    public User getUser(@PathParam(value = APIConstants.USER_ID) final Integer userId) {
+    public UserDetails getUser(@PathParam(value = APIConstants.USER_ID) final Integer userId) {
         log.info("getUser, ID: {}", userId);
         return userService.fetchUser(userId);
     }
@@ -77,7 +76,8 @@ public class UserController {
     @Produces(MediaType.APPLICATION_JSON)
     public Response deleteUser(@PathParam(APIConstants.USER_ID) final Integer userId) {
         log.info("deleteUser, ID: {}", userId);
-        if (!userService.isUserExistsById(userId)) {
+
+        if (!userService.isUserExists(userId)) {
             log.info("ERROR: deleteUser, MESSAGE: {}, ID: {}", APIConstants.ERROR_USER_NOT_FOUND, userId);
             throw new ResourceNotFoundException(APIConstants.ERROR_USER_NOT_FOUND);
         }

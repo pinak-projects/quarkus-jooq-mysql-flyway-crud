@@ -49,7 +49,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"firstName\": \"Alex\",\n\t\"lastName\": \"Morris\",\n\t\"userName\": \"alexmorris\",\n\t\"password\": \"alexmorris321\"\n}"
+					"raw": "{\n\t\"firstName\": \"Alex\",\n\t\"lastName\": \"Morris\",\n\t\"userName\": \"alexmorris\",\n\t\"password\": \"alexmorris321\",\n\t\"roleId\": 1\n}"
 				},
 				"description": ""
 			},
@@ -69,7 +69,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"firstName\": \"Alex\",\n\t\"lastName\": \"Morris\",\n\t\"userName\": \"alexmorris\",\n\t\"password\": \"Alexmorris123\"\n}"
+					"raw": "{\n\t\"firstName\": \"Alex2\",\n\t\"lastName\": \"Morris2\",\n\t\"userName\": \"alexmorris2\",\n\t\"password\": \"alexmorris321\",\n\t\"roleId\": 2\n}"
 				},
 				"description": ""
 			},

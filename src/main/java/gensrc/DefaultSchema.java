@@ -4,6 +4,7 @@
 package gensrc;
 
 
+import gensrc.tables.RoleMaster;
 import gensrc.tables.UserMaster;
 
 import java.util.Arrays;
@@ -20,12 +21,17 @@ import org.jooq.impl.SchemaImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class DefaultSchema extends SchemaImpl {
 
-    private static final long serialVersionUID = 1732141152;
+    private static final long serialVersionUID = -94358658;
 
     /**
      * The reference instance of <code>DEFAULT_SCHEMA</code>
      */
     public static final DefaultSchema DEFAULT_SCHEMA = new DefaultSchema();
+
+    /**
+     * The table <code>role_master</code>.
+     */
+    public final RoleMaster ROLE_MASTER = RoleMaster.ROLE_MASTER;
 
     /**
      * The table <code>user_master</code>.
@@ -48,6 +54,7 @@ public class DefaultSchema extends SchemaImpl {
     @Override
     public final List<Table<?>> getTables() {
         return Arrays.<Table<?>>asList(
+            RoleMaster.ROLE_MASTER,
             UserMaster.USER_MASTER);
     }
 }
