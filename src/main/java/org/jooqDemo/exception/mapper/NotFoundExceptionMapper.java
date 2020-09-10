@@ -15,7 +15,7 @@ public class NotFoundExceptionMapper implements ExceptionMapper<ResourceNotFound
 
     @Override
     public Response toResponse(ResourceNotFoundException e) {
-        log.error("NotFoundException", e.getMessage());
+        log.error("NotFoundException {}", e.getMessage());
         return Response.status(Status.NOT_FOUND).entity(new ResponseMessage(e.getMessage())).build();
     }
 }

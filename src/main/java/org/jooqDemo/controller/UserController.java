@@ -5,8 +5,7 @@ import org.jooqDemo.constants.APIConstants;
 import org.jooqDemo.constants.ResponseMessage;
 import org.jooqDemo.exception.CustomException;
 import org.jooqDemo.exception.ResourceNotFoundException;
-import org.jooqDemo.model.user.User;
-import org.jooqDemo.model.user.UserDetails;
+import org.jooqDemo.model.User;
 import org.jooqDemo.service.UserService;
 
 import javax.inject.Inject;
@@ -41,8 +40,8 @@ public class UserController {
     @Path(value = APIConstants.USER_ID_PARAM)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    public Response updateUser(@PathParam(APIConstants.USER_ID) final Integer userId, @Valid User user) {
-        if (!userService.isUserExists(userId)) {
+    public Response updateUser(@PathParam(APIConstants.USER_ID) Integer userId, @Valid User user) {
+        if (userService.isUserExists(userId)) {
             log.info("ERROR: updateUser, MESSAGE: {}, ID: {}", APIConstants.ERROR_USER_NOT_FOUND, userId);
             throw new ResourceNotFoundException(APIConstants.ERROR_USER_NOT_FOUND);
         }
@@ -59,7 +58,7 @@ public class UserController {
     @GET
     @Path(value = APIConstants.USER_ID_PARAM)
     @Produces(MediaType.APPLICATION_JSON)
-    public UserDetails getUser(@PathParam(value = APIConstants.USER_ID) final Integer userId) {
+    public User getUser(@PathParam(value = APIConstants.USER_ID) Integer userId) {
         log.info("getUser, ID: {}", userId);
         return userService.fetchUser(userId);
     }
@@ -77,7 +76,7 @@ public class UserController {
     public Response deleteUser(@PathParam(APIConstants.USER_ID) final Integer userId) {
         log.info("deleteUser, ID: {}", userId);
 
-        if (!userService.isUserExists(userId)) {
+        if (userService.isUserExists(userId)) {
             log.info("ERROR: deleteUser, MESSAGE: {}, ID: {}", APIConstants.ERROR_USER_NOT_FOUND, userId);
             throw new ResourceNotFoundException(APIConstants.ERROR_USER_NOT_FOUND);
         }

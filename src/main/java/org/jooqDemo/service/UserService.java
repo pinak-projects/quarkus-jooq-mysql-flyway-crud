@@ -1,13 +1,12 @@
 package org.jooqDemo.service;
 
-import org.jooqDemo.model.user.User;
-import org.jooqDemo.model.user.UserDetails;
+import org.jooqDemo.model.User;
 
 import java.util.List;
 
 public interface UserService {
 
-	UserDetails fetchUser(Integer userId);
+	User fetchUser(Integer userId);
 
 	int createUser(User user);
 

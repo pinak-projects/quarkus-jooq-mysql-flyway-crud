@@ -1,4 +1,4 @@
-package org.jooqDemo.model.user;
+package org.jooqDemo.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
@@ -34,8 +34,7 @@ public class User implements Serializable {
     private String password;
 
     @NotNull
-    private Integer roleId;
-
+    private Role role;
     private Date createdOn;
     private Date updatedOn;
 

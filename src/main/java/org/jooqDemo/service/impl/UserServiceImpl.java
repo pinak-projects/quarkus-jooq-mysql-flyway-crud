@@ -1,14 +1,12 @@
 package org.jooqDemo.service.impl;
 
 import gensrc.Tables;
-import gensrc.tables.records.UserMasterRecord;
 import org.jooq.DSLContext;
 import org.jooq.Record;
 import org.jooqDemo.constants.APIConstants;
 import org.jooqDemo.exception.ResourceNotFoundException;
 import org.jooqDemo.model.Role;
-import org.jooqDemo.model.user.User;
-import org.jooqDemo.model.user.UserDetails;
+import org.jooqDemo.model.User;
 import org.jooqDemo.service.UserService;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -28,14 +26,13 @@ public class UserServiceImpl implements UserService {
     DSLContext dslContext;
 
     @Override
-    public int createUser(final User user) {
+    public int createUser(User user) {
         user.setInitialTimestamps();
-        final UserMasterRecord userMasterRecord = dslContext.newRecord(USER_MASTER, user);
-        return userMasterRecord.insert();
+        return dslContext.newRecord(USER_MASTER, user).insert();
     }
 
     @Override
-    public UserDetails fetchUser(final Integer userId) {
+    public User fetchUser(Integer userId) {
 
         final Record record = dslContext.select(
                 USER_MASTER.asterisk(),
@@ -49,7 +46,7 @@ public class UserServiceImpl implements UserService {
                  .fetchOptional()
                  .orElseThrow(() -> new ResourceNotFoundException(APIConstants.ERROR_USER_NOT_FOUND));
 
-                final UserDetails userDetails = record.into(USER_MASTER).into(UserDetails.class);
+                final User userDetails = record.into(USER_MASTER).into(User.class);
                 userDetails.setRole(record.into(Tables.ROLE_MASTER).into(Role.class));
                 return userDetails;
     }
@@ -63,7 +60,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int deleteUser(final Integer userId) {
+    public int deleteUser(Integer userId) {
         return dslContext.update(USER_MASTER)
                 .set(USER_MASTER.IS_DELETED, true)
                 .where(USER_MASTER.USER_ID.eq(userId))
@@ -71,8 +68,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean isUserExists(final Integer userId) {
-        return dslContext.fetchExists(
+    public boolean isUserExists(Integer userId) {
+        return !dslContext.fetchExists(
                 dslContext.selectOne()
                         .from(USER_MASTER)
                         .where(USER_MASTER.USER_ID.eq(userId)
@@ -81,7 +78,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int updateUserDetails(final User user) {
+    public int updateUserDetails(User user) {
         user.setUpdatedOn(new Date());
         return dslContext.newRecord(USER_MASTER, user)
                 .update();
